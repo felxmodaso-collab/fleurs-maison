@@ -11,17 +11,44 @@
   </script>
   <meta name="description" content="Maison florale — bouquets, mariages, abonnements." />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=Caveat:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <!-- Self-hosted fonts (no Google CDN latency, no FOUT-flash) -->
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="./public/fonts/6xKpdSJbL9-e9LuoeQiDRQR8WOXaOg.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="./public/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="./public/fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="./public/fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="./public/fonts/WnznHAc5bAfYB2QRah7pcpNvOx-pjcB9eIWpYQ.woff2" />
+  <link rel="stylesheet" href="./fonts.css" />
 
   <link rel="stylesheet" href="./styles.css" />
 
   <link rel="preload" as="image" href="./public/frames/t1/001.jpg" />
   <link rel="preload" as="image" href="./public/frames/t1/048.jpg" />
   <link rel="preload" as="image" href="./public/frames/t1/096.jpg" />
+  <!-- Hint browser to fetch all cinemagraphs early so they're ready when the user reaches each zone -->
+  <link rel="prefetch" as="video" href="./public/videos/cine_s1.mp4" />
+  <link rel="prefetch" as="video" href="./public/videos/cine_s2.mp4" />
+  <link rel="prefetch" as="video" href="./public/videos/cine_long_hall.mp4" />
+  <link rel="prefetch" as="video" href="./public/videos/cine_garden.mp4" />
 </head>
 <body class="is-locked">
+
+  <!-- Mobile portrait orientation prompt (auto-shown via @media, no JS toggle) -->
+  <div class="orientation-prompt" aria-hidden="true">
+    <div class="orientation-prompt__inner">
+      <div class="orientation-prompt__icon" aria-hidden="true">
+        <svg width="68" height="68" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="14" y="6" width="22" height="36" rx="3" ry="3"/>
+          <line x1="22" y1="38" x2="28" y2="38"/>
+          <path d="M40 22a22 22 0 0 1 18 22"/>
+          <polyline points="56 36 58 44 50 46"/>
+        </svg>
+      </div>
+      <p class="orientation-prompt__brand">Fleurs</p>
+      <h2 class="orientation-prompt__title">Tournez votre téléphone</h2>
+      <p class="orientation-prompt__sub">Pour une meilleure expérience visuelle, basculez l'écran en mode paysage.</p>
+      <p class="orientation-prompt__ru">Для лучшего визуального впечатления — переверните телефон горизонтально.</p>
+    </div>
+  </div>
 
   <!-- Loader -->
   <div class="loader" aria-hidden="true">

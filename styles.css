@@ -17,10 +17,11 @@
   --c-rose:      #d8a9a4;
   --c-leaf:      #5a7458;
 
-  --serif:  'Cormorant Garamond', 'Times New Roman', serif;
-  --script: 'Pinyon Script', cursive;
-  --hand:   'Caveat', cursive;
-  --sans:   'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Fallback chains tuned to visually approximate the loaded fonts (reduces FOUT-jolt) */
+  --serif:  'Cormorant Garamond', 'Garamond', 'Georgia', 'Cambria', 'Times New Roman', serif;
+  --script: 'Pinyon Script', 'Apple Chancery', 'Snell Roundhand', 'Brush Script MT', cursive;
+  --hand:   'Caveat', 'Bradley Hand', 'Apple Chancery', cursive;
+  --sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
 
   --shadow-text: 0 2px 18px rgba(0, 0, 0, 0.55);
   --shadow-text-soft: 0 1px 8px rgba(0, 0, 0, 0.4);
@@ -989,6 +990,92 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   text-transform: uppercase;
   color: var(--c-cream);
   opacity: 0.45;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Mobile portrait orientation prompt
+   Visible only on phone-sized portrait viewports; pure CSS — no JS,
+   so it auto-disappears the moment device rotates to landscape.
+   ──────────────────────────────────────────────────────────── */
+.orientation-prompt {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--c-bg);
+  color: var(--c-cream);
+  padding: 28px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--serif);
+}
+.orientation-prompt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 40% at 50% 50%, rgba(216, 169, 164, 0.12) 0%, transparent 70%),
+    linear-gradient(180deg, var(--c-bg) 0%, #0d1311 100%);
+  z-index: -1;
+}
+.orientation-prompt__inner {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.orientation-prompt__icon {
+  color: var(--c-cream);
+  opacity: 0.85;
+  margin-bottom: 28px;
+  animation: rotateHint 2.6s ease-in-out infinite;
+  transform-origin: 32px 32px;
+}
+@keyframes rotateHint {
+  0%, 28% { transform: rotate(0deg); }
+  50%     { transform: rotate(-90deg); }
+  78%     { transform: rotate(-90deg); }
+  100%    { transform: rotate(0deg); }
+}
+.orientation-prompt__brand {
+  font-family: var(--script);
+  font-size: 56px;
+  line-height: 1;
+  margin-bottom: 18px;
+  color: var(--c-cream);
+}
+.orientation-prompt__title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.orientation-prompt__sub {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.55;
+  opacity: 0.78;
+  margin-bottom: 18px;
+}
+.orientation-prompt__ru {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  line-height: 1.6;
+}
+
+/* Show on phones (touch + small + portrait). Auto-hides on landscape. */
+@media (orientation: portrait) and (max-width: 900px) and (pointer: coarse) {
+  .orientation-prompt { display: flex; }
+  /* Suppress potential heavy paint behind prompt */
+  body.is-locked,
+  body { overflow: hidden; }
 }
 
 /* ────────────────────────────────────────────────────────────
