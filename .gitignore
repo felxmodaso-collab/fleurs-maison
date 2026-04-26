@@ -1,0 +1,18 @@
+# Source assets not needed for runtime (originals before optimization)
+public/_sources/
+
+# Local diagnostic outputs (screenshots, frame inspections)
+runtime/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+
+# Stale empty dirs from initial scaffolding
+src/
+
+# Node (in case any build tooling is added later)
+node_modules/

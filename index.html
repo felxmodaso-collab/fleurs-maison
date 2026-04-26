@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fleurs — Maison Florale</title>
+  <script>
+    // Force scroll to top on every load (no browser scroll restoration)
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  </script>
+  <meta name="description" content="Maison florale — bouquets, mariages, abonnements." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=Caveat:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./styles.css" />
+
+  <link rel="preload" as="image" href="./public/frames/t1/001.jpg" />
+  <link rel="preload" as="image" href="./public/frames/t1/048.jpg" />
+  <link rel="preload" as="image" href="./public/frames/t1/096.jpg" />
+</head>
+<body class="is-locked">
+
+  <!-- Loader -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <p class="loader__brand">Fleurs</p>
+      <div class="loader__bar"><span></span></div>
+      <p class="loader__hint">Préparation de la boutique</p>
+    </div>
+  </div>
+
+  <!-- ─── STAGE: fixed, full-screen, all visuals layered here ─── -->
+  <div class="stage">
+
+    <!-- 5 cinemagraph videos (cross-faded by scroll zone) -->
+    <video class="layer layer--cine is-visible" data-cine="entrance" data-idle-src="./public/videos/cine_entrance_idle.mp4" autoplay muted playsinline preload="auto">
+      <source src="./public/videos/cine_entrance.mp4" type="video/mp4" />
+    </video>
+    <video class="layer layer--cine" data-cine="s1" muted loop playsinline preload="auto">
+      <source src="./public/videos/cine_s1.mp4" type="video/mp4" />
+    </video>
+    <video class="layer layer--cine" data-cine="s2" data-idle-src="./public/videos/cine_s2_idle.mp4" muted playsinline preload="auto">
+      <source src="./public/videos/cine_s2.mp4" type="video/mp4" />
+    </video>
+    <video class="layer layer--cine" data-cine="long_hall" muted loop playsinline preload="auto">
+      <source src="./public/videos/cine_long_hall.mp4" type="video/mp4" />
+    </video>
+    <video class="layer layer--cine" data-cine="garden" muted loop playsinline preload="auto">
+      <source src="./public/videos/cine_garden.mp4" type="video/mp4" />
+    </video>
+
+    <!-- 4 transition canvases (frame sequences) -->
+    <canvas class="layer layer--canvas" data-trans="t1" data-dir="t1" data-count="96"></canvas>
+    <canvas class="layer layer--canvas" data-trans="t2" data-dir="t2" data-count="96"></canvas>
+    <canvas class="layer layer--canvas" data-trans="t3" data-dir="t3" data-count="96"></canvas>
+    <canvas class="layer layer--canvas" data-trans="t4" data-dir="t4" data-count="96"></canvas>
+
+    <!-- Veil for legibility -->
+    <div class="layer layer--veil"></div>
+
+    <!-- Content overlays (cross-faded by scroll zone) -->
+    <div class="content content--center is-visible" data-content="hero">
+      <p class="brand-eyebrow">Maison florale · Paris · depuis 2024</p>
+      <h1 class="brand">Fleurs</h1>
+      <p class="brand-tag">L'art floral, repensé.</p>
+    </div>
+
+    <div class="content content--left" data-content="s1">
+      <p class="section-tag">À propos</p>
+      <h2 class="section-title">Chaque tige,<br/>un geste.</h2>
+      <p class="section-body">
+        Maison d'artisans florists. Roses jardin de la Drôme, pivoines coréennes,
+        renoncules d'Italie — chaque fleur choisie à la main, le matin, à Rungis.
+        Nous composons sans recettes, à l'instinct, dans la lumière de notre serre du XIXᵉ.
+      </p>
+    </div>
+
+    <div class="content content--right" data-content="s2">
+      <p class="section-tag">Mariages & événements</p>
+      <h2 class="section-title">Vos moments,<br/>en fleurs.</h2>
+      <p class="section-body">
+        De la cérémonie intime au gala somptueux, nous orchestrons votre univers floral
+        sur mesure : arches, voûtes vivantes, compositions de table, bouquets de mariée.
+        Devis personnalisé sous 48 h.
+      </p>
+      <a class="cta cta--ghost" href="mailto:atelier@fleurs.maison">Demander un devis</a>
+    </div>
+
+    <div class="content content--left" data-content="s3">
+      <p class="section-tag">Boutique</p>
+      <h2 class="section-title">L'abondance<br/>saisonnière.</h2>
+      <p class="section-body">
+        Roses jardin, pivoines, dahlias, renoncules, anémones. Composez votre bouquet ou
+        choisissez l'une de nos signatures. Livraison en 2 h sur Paris.
+      </p>
+      <div class="cta-row">
+        <button class="cta" type="button" id="open-shop">Voir le catalogue</button>
+        <button class="cta cta--ghost" type="button" id="open-cart">Mon panier <span class="cart-count" id="cart-count-cta">0</span></button>
+      </div>
+    </div>
+
+    <div class="content content--right" data-content="s4">
+      <p class="section-tag">L'atelier · contact</p>
+      <h2 class="section-title">Venez prendre<br/>un café.</h2>
+      <p class="section-body">
+        12 rue des Lilas, 75011 Paris. Atelier ouvert mardi–samedi, 10 h–19 h.
+        Cours d'art floral le dimanche matin.
+      </p>
+      <ul class="contact-list">
+        <li>+33 1 23 45 67 89</li>
+        <li>atelier@fleurs.maison</li>
+        <li>@fleurs.maison</li>
+      </ul>
+    </div>
+
+    <!-- Door CTA (only visible at hero zone) -->
+    <button class="door-cta" type="button" aria-label="Toquer pour entrer">
+      <span class="door-cta__line">Toquer pour entrer</span>
+      <span class="door-cta__sub">Cliquer ici ou sur la porte</span>
+    </button>
+
+    <!-- Footer (only visible at s4 zone) -->
+    <p class="site-footer">© Fleurs · 2024 — Maison florale indépendante</p>
+
+  </div>
+
+  <!-- ─── TRACK: empty, defines scroll length ─── -->
+  <div class="track"></div>
+
+  <!-- ─── Sticky UI ─── -->
+  <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-overlay">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <path d="M3 7h18M3 12h18M3 17h18" class="nav-toggle__open"/>
+      <path d="M5 5l14 14M19 5L5 19" class="nav-toggle__close"/>
+    </svg>
+  </button>
+
+  <aside class="nav-overlay" id="nav-overlay" hidden>
+    <nav>
+      <ol class="nav-list">
+        <li><a href="#" data-nav="hero"><span class="nav-num">00</span><span class="nav-name">Entrée</span></a></li>
+        <li><a href="#" data-nav="s1"><span class="nav-num">01</span><span class="nav-name">À propos</span></a></li>
+        <li><a href="#" data-nav="s2"><span class="nav-num">02</span><span class="nav-name">Mariages</span></a></li>
+        <li><a href="#" data-nav="s3"><span class="nav-num">03</span><span class="nav-name">Boutique</span></a></li>
+        <li><a href="#" data-nav="s4"><span class="nav-num">04</span><span class="nav-name">L'atelier</span></a></li>
+      </ol>
+      <p class="nav-foot">Fleurs — Paris</p>
+    </nav>
+  </aside>
+
+  <!-- Vertical progress rail -->
+  <div class="progress-rail" aria-hidden="true">
+    <span class="progress-rail__dot" data-target="hero" data-active></span>
+    <span class="progress-rail__dot" data-target="s1"></span>
+    <span class="progress-rail__dot" data-target="s2"></span>
+    <span class="progress-rail__dot" data-target="s3"></span>
+    <span class="progress-rail__dot" data-target="s4"></span>
+  </div>
+
+  <!-- Scroll hint at hero -->
+  <div class="scroll-hint" aria-hidden="true">
+    <span></span>
+  </div>
+
+  <!-- ─── Shop Overlay ─── -->
+  <section class="shop-overlay" id="shop-overlay" hidden aria-modal="true" aria-labelledby="shop-title" data-lenis-prevent>
+    <header class="shop-header">
+      <div class="shop-header__inner">
+        <p class="shop-eyebrow">Maison florale · Paris</p>
+        <h2 class="shop-title" id="shop-title">Boutique</h2>
+        <p class="shop-sub">L'abondance saisonnière, livrée en deux heures.</p>
+      </div>
+      <button class="shop-close" type="button" aria-label="Fermer la boutique" id="close-shop">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+      <button class="shop-cart-toggle" type="button" aria-label="Voir le panier" id="open-cart-from-shop">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 7h14l-1.5 11a2 2 0 0 1-2 1.7H8.5A2 2 0 0 1 6.5 18L5 7Z"/>
+          <path d="M9 7V5a3 3 0 0 1 6 0v2"/>
+        </svg>
+        <span class="cart-count" id="cart-count-shop">0</span>
+      </button>
+    </header>
+
+    <div class="shop-grid" id="shop-grid">
+      <!-- Product cards rendered by JS -->
+    </div>
+
+    <footer class="shop-foot">
+      <p>Livraison Paris intra-muros · 2 h · gratuite dès 100 €</p>
+    </footer>
+  </section>
+
+  <!-- ─── Cart Sidebar ─── -->
+  <aside class="cart-panel" id="cart-panel" hidden aria-modal="true" aria-labelledby="cart-title" data-lenis-prevent>
+    <header class="cart-header">
+      <h2 class="cart-title" id="cart-title">Votre panier</h2>
+      <button class="cart-close" type="button" aria-label="Fermer le panier" id="close-cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </header>
+    <div class="cart-items" id="cart-items">
+      <!-- Cart items rendered by JS -->
+    </div>
+    <footer class="cart-foot">
+      <div class="cart-total">
+        <span>Total</span>
+        <strong id="cart-total">0 €</strong>
+      </div>
+      <button class="cta cart-checkout" id="checkout-btn" type="button" disabled>Passer commande</button>
+      <p class="cart-note">Devis personnalisé · paiement sécurisé</p>
+    </footer>
+  </aside>
+  <div class="cart-backdrop" id="cart-backdrop" hidden></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
