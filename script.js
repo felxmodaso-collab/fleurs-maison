@@ -235,6 +235,8 @@
     stunt.loop = true;
     stunt.playsInline = true;
     stunt.preload = 'auto';
+    // Inherit poster + data-cine — so even if idle mp4 hasn't buffered, the still poster shows
+    if (intro.poster) stunt.poster = intro.poster;
     stunt.innerHTML = `<source src="${idleSrc}" type="video/mp4">`;
     intro.insertAdjacentElement('afterend', stunt);
 

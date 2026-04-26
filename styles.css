@@ -45,6 +45,7 @@ body {
 body.is-locked {
   overflow: hidden;
   height: 100vh;
+  height: 100dvh;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -106,6 +107,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   inset: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;  /* iOS Safari: handle URL-bar collapse/expand */
   z-index: 1;
   overflow: hidden;
   background: var(--c-bg);
@@ -128,7 +130,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: opacity 0.18s linear;
   will-change: opacity;
   filter: saturate(1.02) contrast(1.02);
+  /* Background-image fallback shows immediately even while video buffers — no black screen */
+  background-size: cover;
+  background-position: center center;
+  background-color: var(--c-bg);
 }
+[data-cine="entrance"]   { background-image: url('./public/posters/cine_entrance.jpg'); }
+[data-cine="s1"]         { background-image: url('./public/posters/cine_s1.jpg'); }
+[data-cine="s2"]         { background-image: url('./public/posters/cine_s2.jpg'); }
+[data-cine="long_hall"]  { background-image: url('./public/posters/cine_long_hall.jpg'); }
+[data-cine="garden"]     { background-image: url('./public/posters/cine_garden.jpg'); }
 .layer--canvas {
   opacity: 0;
   transition: opacity 0.18s linear;
