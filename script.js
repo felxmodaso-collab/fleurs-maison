@@ -686,17 +686,20 @@
 
   function renderShop() {
     const grid = $('#shop-grid');
-    if (!grid || grid.children.length) return; // already rendered
-    const fmt = (n) => `${n} €`;
-    grid.innerHTML = PRODUCTS.map(p => `
-      <article class="product-card" data-pid="${p.id}">
-        <img class="product-card__img" src="./public/bouquets/${p.img}" alt="${p.name}" loading="lazy" />
-        <div class="product-card__body">
-          <h3 class="product-card__name">${p.name}</h3>
-          <p class="product-card__desc">${p.desc}</p>
-          <div class="product-card__bot">
-            <span class="product-card__price">${fmt(p.price)}</span>
-            <button class="product-card__add" type="button" data-add="${p.id}">Ajouter</button>
+    if (!grid || grid.children.length) return;
+    grid.innerHTML = PRODUCTS.map((p, i) => `
+      <article class="spread" data-pid="${p.id}">
+        <div class="spread__media">
+          <span class="spread__num">N° ${String(i + 1).padStart(2, '0')}</span>
+          <img class="spread__img" src="./public/bouquets/${p.img}" alt="${p.name}" loading="lazy" />
+        </div>
+        <div class="spread__copy">
+          <span class="spread__rule" aria-hidden="true"></span>
+          <h3 class="spread__name">${p.name}</h3>
+          <p class="spread__desc">${p.desc}</p>
+          <div class="spread__meta">
+            <span class="spread__price">${p.price} €</span>
+            <button class="spread__add" type="button" data-add="${p.id}">Choisir</button>
           </div>
         </div>
       </article>
@@ -707,11 +710,11 @@
       if (!btn) return;
       addToCart(btn.dataset.add);
       btn.classList.add('is-added');
-      btn.textContent = 'Ajouté ✓';
+      btn.textContent = 'Ajouté';
       setTimeout(() => {
         btn.classList.remove('is-added');
-        btn.textContent = 'Ajouter';
-      }, 1300);
+        btn.textContent = 'Choisir';
+      }, 1400);
     });
   }
 
