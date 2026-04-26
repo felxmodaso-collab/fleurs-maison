@@ -432,19 +432,27 @@
     return ZONES[ZONES.length - 1];
   }
 
+  let _pauseTimeout = null;
   function setActiveCine(name) {
+    // Cancel any pending pause from a previous zone change — fixes race where
+    // user passes through transitions quickly and the t-zone's queued
+    // "pause everything" pauses the just-activated next-scene cinemagraph.
+    if (_pauseTimeout) { clearTimeout(_pauseTimeout); _pauseTimeout = null; }
+
     Object.entries(cines).forEach(([k, v]) => {
       if (k === name) {
         v.classList.add('is-visible');
+        if (v.readyState < 2) { try { v.load(); } catch (e) {} }
         if (v.paused) v.play().catch(() => {});
       } else {
         v.classList.remove('is-visible');
       }
     });
-    setTimeout(() => {
+    _pauseTimeout = setTimeout(() => {
       Object.entries(cines).forEach(([k, v]) => {
         if (k !== name && !v.paused) v.pause();
       });
+      _pauseTimeout = null;
     }, 700);
   }
 

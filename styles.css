@@ -1173,3 +1173,79 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .product-card:hover { transform: none; }
   .product-card:hover .product-card__img { transform: none; }
 }
+
+/* ────────────────────────────────────────────────────────────
+   Landscape mobile (short height, wide width, touch device)
+   Phone in landscape: viewport ~932×430 / 844×390 — vertical space tight.
+   Fit all content without overflow/cropping.
+   ──────────────────────────────────────────────────────────── */
+@media (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+  .scene__content { padding: 6vh 8vw; }
+
+  .brand { font-size: clamp(56px, 12vh, 110px); line-height: 0.85; }
+  .brand-eyebrow { font-size: 10px; letter-spacing: 0.32em; margin-bottom: 10px; }
+  .brand-tag { font-size: 13px; margin-top: 12px; }
+
+  .section-tag { font-size: clamp(18px, 4vh, 24px); margin-bottom: 8px; }
+  .section-title { font-size: clamp(32px, 9vh, 56px); line-height: 0.95; margin-bottom: 14px; max-width: 14ch; }
+  .section-body { font-size: 13px; line-height: 1.45; margin-bottom: 16px; max-width: 56ch; }
+
+  .door-cta { padding: 10px 22px; bottom: 12px; }
+  .door-cta__line { font-size: 12px; letter-spacing: 0.12em; }
+  .door-cta__sub { font-size: 8px; margin-top: 3px; }
+
+  .cta { padding: 10px 22px; font-size: 10px; }
+  .cta-row { gap: 10px; }
+
+  .nav-toggle { top: 10px; right: 10px; width: 38px; height: 38px; }
+  .progress-rail { display: none; }
+  .scroll-hint { display: none; }
+  .site-footer { font-size: 9px; bottom: 10px; }
+
+  .contact-list { font-size: 13px; }
+  .contact-list li { padding: 3px 0; }
+
+  /* Shop in landscape mobile: 2 columns, denser cards */
+  .shop-overlay { padding: 0 0 24px; }
+  .shop-header { padding: 14px 18px 12px; }
+  .shop-title { font-size: clamp(24px, 6vh, 36px); }
+  .shop-eyebrow { font-size: 9px; }
+  .shop-sub { font-size: 12px; }
+  .shop-close, .shop-cart-toggle { width: 36px; height: 36px; }
+
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 14px 18px 30px;
+  }
+  .product-card { border-radius: 12px; }
+  .product-card__img { aspect-ratio: 16/9; border-radius: 12px 12px 0 0; }
+  .product-card__body { padding: 12px 14px 14px; gap: 6px; }
+  .product-card__name { font-size: 16px; }
+  .product-card__desc { font-size: 11px; min-height: 0; }
+  .product-card__bot { padding-top: 8px; margin-top: 6px; }
+  .product-card__price { font-size: 15px; }
+  .product-card__add { padding: 8px 14px; font-size: 9px; letter-spacing: 0.2em; }
+
+  /* Cart in landscape: keep narrow, compact */
+  .cart-panel { width: min(360px, calc(100vw - 24px)); top: 10px; right: 10px; bottom: 10px; }
+  .cart-header { padding: 14px 18px 10px; }
+  .cart-title { font-size: 20px; }
+  .cart-items { padding: 12px 18px; gap: 12px; }
+  .cart-item { grid-template-columns: 56px 1fr auto; gap: 10px; }
+  .cart-item__img { width: 56px; height: 70px; }
+  .cart-item__name { font-size: 13px; }
+  .cart-item__price { font-size: 11px; }
+  .cart-foot { padding: 14px 18px 16px; }
+  .cart-total span { font-size: 14px; }
+  .cart-total strong { font-size: 18px; }
+  .cart-checkout { padding: 12px; font-size: 10px; }
+  .cart-note { font-size: 9px; }
+}
+
+/* iPhone safe areas (notch / home indicator) */
+@supports (padding: env(safe-area-inset-top)) {
+  .nav-toggle { top: max(14px, env(safe-area-inset-top)); right: max(14px, env(safe-area-inset-right)); }
+  .door-cta { bottom: max(28px, env(safe-area-inset-bottom)); }
+  .site-footer { bottom: max(22px, env(safe-area-inset-bottom)); }
+}
