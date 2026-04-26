@@ -606,11 +606,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   pointer-events: auto;
 }
 
-/* Floating gestural icons — no header strip, just two small buttons */
+/* Floating gestural icons — siblings of .cahier in DOM (cahier has backdrop-filter
+   which creates containing-block for fixed-position children, trapping them) */
 .cahier-float {
   position: fixed;
   top: clamp(20px, 3vw, 32px);
-  z-index: 270;
+  z-index: 280;  /* above cahier (250) so always visible regardless of scroll */
   width: 38px;
   height: 38px;
   border-radius: 50%;

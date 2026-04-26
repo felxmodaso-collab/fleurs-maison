@@ -771,11 +771,16 @@
   function openShop() {
     renderShop();
     shopOverlay?.removeAttribute('hidden');
+    // Show floating buttons (they're siblings of cahier — see HTML)
+    $('#close-shop')?.removeAttribute('hidden');
+    $('#open-cart-from-shop')?.removeAttribute('hidden');
     // Note: data-lenis-prevent on shop overlay = Lenis ignores wheel inside it,
     // native scroll works. We don't need lenis.stop().
   }
   function closeShop() {
     shopOverlay?.setAttribute('hidden', '');
+    $('#close-shop')?.setAttribute('hidden', '');
+    $('#open-cart-from-shop')?.setAttribute('hidden', '');
   }
 
   function openCart() {
