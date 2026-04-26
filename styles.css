@@ -587,71 +587,90 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   pointer-events: auto;
 }
 
-/* Cahier header */
-.cahier-head {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: center;
-  gap: 14px;
-  padding: 32px clamp(28px, 8vw, 110px) 26px;
-  background: linear-gradient(180deg, rgba(10, 13, 11, 0.85) 0%, rgba(10, 13, 11, 0) 100%);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-.cahier-head__inner { line-height: 1.1; }
-.cahier-eyebrow {
-  font-family: var(--hand);
-  font-weight: 500;
-  font-size: clamp(15px, 1.4vw, 19px);
-  color: var(--c-rose);
-  margin-bottom: 4px;
-  letter-spacing: 0.02em;
-}
-.cahier-title {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(44px, 5.2vw, 72px);
-  line-height: 1;
-  color: var(--c-cream);
-  letter-spacing: -0.01em;
-}
-
-.cahier-btn {
-  position: relative;
-  width: 42px;
-  height: 42px;
+/* Floating gestural icons — no header strip, just two small buttons */
+.cahier-float {
+  position: fixed;
+  top: clamp(20px, 3vw, 32px);
+  z-index: 270;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: transparent;
-  border: 1px solid rgba(245, 233, 212, 0.3);
+  background: rgba(13, 19, 17, 0.5);
+  border: 1px solid rgba(245, 233, 212, 0.28);
   color: var(--c-cream);
   display: grid;
   place-items: center;
   cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s var(--ease-out);
 }
-.cahier-btn:hover {
-  background: rgba(245, 233, 212, 0.1);
-  border-color: rgba(245, 233, 212, 0.6);
+.cahier-float:hover {
+  background: rgba(245, 233, 212, 0.14);
+  border-color: rgba(245, 233, 212, 0.55);
 }
-.cahier-btn--cart .cart-count {
+.cahier-float--close { right: clamp(20px, 3vw, 32px); }
+.cahier-float--cart  { right: calc(clamp(20px, 3vw, 32px) + 50px); }
+.cahier-float--cart .cart-count {
   position: absolute;
-  top: -6px; right: -6px;
-  min-width: 20px; height: 20px;
-  padding: 0 6px;
+  top: -5px; right: -5px;
+  min-width: 18px; height: 18px;
+  padding: 0 5px;
   background: var(--c-rose);
   color: var(--c-iron);
-  border-radius: 10px;
+  border-radius: 9px;
   font-family: var(--sans);
   font-size: 10px;
   font-weight: 600;
   display: grid;
   place-items: center;
 }
-.cahier-btn--cart .cart-count[data-count="0"] { display: none; }
+.cahier-float--cart .cart-count[data-count="0"] { display: none; }
+
+/* Chapter intro — flows with content, not a fixed bar */
+.cahier-intro {
+  text-align: center;
+  padding: clamp(80px, 14vh, 160px) clamp(28px, 8vw, 110px) clamp(50px, 8vh, 90px);
+  max-width: 880px;
+  margin: 0 auto;
+}
+.cahier-eyebrow {
+  font-family: var(--hand);
+  font-weight: 500;
+  font-size: clamp(17px, 1.6vw, 22px);
+  color: var(--c-rose);
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+}
+.cahier-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(56px, 8vw, 110px);
+  line-height: 1;
+  color: var(--c-cream);
+  letter-spacing: -0.01em;
+  margin-bottom: 22px;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.6), 0 1px 3px rgba(0,0,0,0.5);
+}
+.cahier-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(17px, 1.4vw, 22px);
+  color: var(--c-cream);
+  opacity: 0.92;
+  line-height: 1.45;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.55);
+}
+.cahier-rule {
+  display: block;
+  width: 60px; height: 1px;
+  background: var(--c-rose);
+  margin: 36px auto 0;
+  opacity: 0.7;
+}
 
 /* ─── Cahier spreads (editorial layout, no cards) ─── */
 .cahier-spreads {
@@ -675,37 +694,39 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .spread__media {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  border-radius: 4px;
+  /* Soft drop-shadow + cream inner highlight — like a print photo on a table */
+  box-shadow:
+    0 1px 0 rgba(245, 233, 212, 0.18) inset,
+    0 30px 60px -12px rgba(0, 0, 0, 0.55),
+    0 12px 24px -8px rgba(0, 0, 0, 0.4);
   background: var(--c-iron);
-}
-.spread__media::after {
-  /* Тонкая декоративная рамка-багет */
-  content: '';
-  position: absolute;
-  inset: 12px;
-  border: 1px solid rgba(245, 233, 212, 0.12);
-  pointer-events: none;
 }
 .spread__img {
   display: block;
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
+  border-radius: 4px;  /* softens the sharp corners */
   transition: transform 1.6s var(--ease-out);
 }
 .spread:hover .spread__img { transform: scale(1.025); }
 
 .spread__num {
   position: absolute;
-  top: 14px;
-  left: 18px;
+  top: -28px;
+  left: 4px;
   font-family: var(--hand);
-  font-size: 18px;
+  font-size: 19px;
   color: var(--c-cream);
-  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+  opacity: 0.78;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
   z-index: 2;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 }
+/* Mirror the page-number on even spreads (text-on-left, image-on-right) */
+.spread:nth-child(even) .spread__num { left: auto; right: 4px; }
 
 .spread__copy {
   display: flex;

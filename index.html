@@ -194,22 +194,26 @@
 
   <!-- ─── Shop / Cahier ─── -->
   <section class="cahier" id="shop-overlay" hidden aria-modal="true" aria-labelledby="cahier-title" data-lenis-prevent>
-    <header class="cahier-head">
-      <div class="cahier-head__inner">
-        <p class="cahier-eyebrow">Cahier des fleurs · Saison printemps</p>
-        <h2 class="cahier-title" id="cahier-title">Le cahier</h2>
-      </div>
-      <button class="cahier-btn cahier-btn--cart" type="button" aria-label="Voir le panier" id="open-cart-from-shop">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 7h14l-1.5 11a2 2 0 0 1-2 1.7H8.5A2 2 0 0 1 6.5 18L5 7Z"/>
-          <path d="M9 7V5a3 3 0 0 1 6 0v2"/>
-        </svg>
-        <span class="cart-count" id="cart-count-shop">0</span>
-      </button>
-      <button class="cahier-btn cahier-btn--close" type="button" aria-label="Fermer le cahier" id="close-shop">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5l14 14M19 5L5 19"/></svg>
-      </button>
-    </header>
+
+    <!-- Floating gestural buttons — no header strip -->
+    <button class="cahier-float cahier-float--close" type="button" aria-label="Fermer le cahier" id="close-shop">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <button class="cahier-float cahier-float--cart" type="button" aria-label="Voir le panier" id="open-cart-from-shop">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 7h14l-1.5 11a2 2 0 0 1-2 1.7H8.5A2 2 0 0 1 6.5 18L5 7Z"/>
+        <path d="M9 7V5a3 3 0 0 1 6 0v2"/>
+      </svg>
+      <span class="cart-count" id="cart-count-shop">0</span>
+    </button>
+
+    <!-- Intro as a chapter heading IN THE SCROLL FLOW (not as fixed top bar) -->
+    <div class="cahier-intro">
+      <p class="cahier-eyebrow">Cahier des fleurs · Saison printemps</p>
+      <h2 class="cahier-title" id="cahier-title">Le cahier</h2>
+      <p class="cahier-sub">L'abondance saisonnière,<br/>livrée en deux heures.</p>
+      <span class="cahier-rule" aria-hidden="true"></span>
+    </div>
 
     <div class="cahier-spreads" id="shop-grid">
       <!-- Editorial spreads rendered by JS -->
