@@ -38,6 +38,19 @@ html, body {
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge legacy */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;                  /* WebKit/Blink (Chrome, Safari) */
+}
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 body {
   overflow-x: hidden;
