@@ -594,7 +594,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.6s var(--ease-out);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.cahier::-webkit-scrollbar { width: 0 !important; height: 0 !important; display: none !important; }
+.cart-items::-webkit-scrollbar { width: 0 !important; height: 0 !important; display: none !important; }
+.cart-panel::-webkit-scrollbar { width: 0 !important; height: 0 !important; display: none !important; }
+.nav-overlay::-webkit-scrollbar { width: 0 !important; height: 0 !important; display: none !important; }
 .cahier:not([hidden]) {
   opacity: 1;
   pointer-events: auto;
