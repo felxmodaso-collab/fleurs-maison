@@ -391,7 +391,7 @@
       // Animate scroll smoothly across the t1 zone in ~6s (mimics "walking through doorway")
       lenis.scrollTo(targetY, {
         duration: 6,
-        easing: (t) => 1 - Math.pow(1 - t, 2.6),  // ease-out quad-ish
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),  // expo-out — same curve as Lenis
       });
     };
 
@@ -506,7 +506,7 @@
   }
 
   // Global lerp tick — smooths every sequence's displayed frame toward target
-  const LERP_FACTOR = 0.18; // higher = more responsive, lower = silkier
+  const LERP_FACTOR = 0.15; // higher = more responsive, lower = silkier
   function tickAllSequences() {
     Object.values(sequences).forEach(seq => seq.tick(LERP_FACTOR));
   }
@@ -557,7 +557,7 @@
     if (targetProgress == null) return;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const targetY = docHeight * targetProgress;
-    lenis.scrollTo(targetY, { duration: 1.6 });
+    lenis.scrollTo(targetY, { duration: 1.6, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
   }
 
   $$('[data-nav]').forEach(a => {
